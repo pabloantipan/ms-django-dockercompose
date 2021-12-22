@@ -12,15 +12,18 @@ services:
       - db
 
   db:
-    platform: linux/x86_64
-    image: mysql:8.0.23
-    environment:
-      MYSQL_DATABASE: admin
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
-      MYSQL_ROOT_PASSWORD: root
+    image: postgres
     volumes: 
-      - .dbdata:/var/lib/myslq
+      - .dbdata:/var/lib/postgresql/data
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: pass
     ports:
-      - 33066:3306
+      - 54322:5432
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
     
